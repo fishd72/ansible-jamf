@@ -1,0 +1,2 @@
+---
+basic_packages: [ 'wget', 'vim', 'git']

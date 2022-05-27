@@ -1,0 +1,17 @@
+[db]
+mysql ansible_host=10.1.9.150
+
+[admin]
+jss1 ansible_host=10.1.9.136
+
+[nodes]
+jss2 ansible_host=10.1.9.152
+jss3 ansible_host=10.1.9.151
+
+[webapps:children]
+admin
+nodes
+
+[all:vars]
+bootstrap_user=ladmin
+new_user=fishd

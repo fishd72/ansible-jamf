@@ -1,0 +1,7 @@
+---
+    ufw_rules:
+      - { port: 22, rule: allow, comment: 'Allow SSH' }
+      - { port: 8080, rule: allow, comment: 'Allow HTTP' }
+      - { port: 8443, rule: allow, comment: 'Allow HTTPS' }
+    _openjdk_jdk_version: 11
+    

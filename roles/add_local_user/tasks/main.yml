@@ -1,0 +1,17 @@
+- name: Getting current group names
+  shell: groups | cut -f 2- -d " " | tr ' ' ','
+  become: no
+  register: group_members
+
+- name: Create new user account
+  user:
+    name: "{{ new_user }}"
+    groups: "{{ group_members.stdout }}"
+    shell: /bin/bash
+    append: yes
+
+- name: Set ssh authorized key for new user
+  authorized_key:
+    user: "{{ new_user }}"
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"

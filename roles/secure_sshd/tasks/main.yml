@@ -1,0 +1,16 @@
+---
+  - name: Secure SSH
+    lineinfile:
+      dest: "{{ sshd_config }}"
+      regexp: "{{ item.regexp }}"
+      line: "{{ item.line }}"
+      state: present
+      validate: '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -f %s'
+    with_items:
+      - regexp: "^PasswordAuthentication "
+        line: "PasswordAuthentication no"
+      - regexp: "^PermitRootLogin"
+        line: "PermitRootLogin no"
+      - regexp: "^PermitEmptyPasswords"
+        line: "PermitEmptyPasswords no"
+    notify: Restart sshd

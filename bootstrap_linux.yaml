@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+
+  vars_prompt:
+
+  - name: connect_password
+    prompt: "What is the connection password?"
+    private: yes
+
+  vars:
+    ansible_user: "{{ bootstrap_user }}"
+    ansible_password: "{{ connect_password }}"
+    ansible_become_password: "{{ connect_password }}"
+  
+  tasks:
+    - name: Create new user if needed
+      import_role:
+        name: add_local_user
+    - name: allow passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: 'visudo -cf %s' 
+

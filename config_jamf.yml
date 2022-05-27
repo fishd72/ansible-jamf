@@ -1,0 +1,13 @@
+---
+    - hosts: db
+      become: yes
+
+      roles:
+        - { role: geerlingguy.mysql }
+    - hosts: webapps
+      roles:
+      - { role: infOpen.openjdk-jdk }
+    - hosts: admin
+      become: yes
+      roles:
+        - { role: jamfpro }

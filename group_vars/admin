@@ -1,0 +1,6 @@
+---
+jamf_db_server: 10.1.9.150
+jamf_db_port: 3306
+jamf_db: jamfsoftware
+jamf_db_user: jamfdbuser1
+jamf_db_pass: jamfsw01

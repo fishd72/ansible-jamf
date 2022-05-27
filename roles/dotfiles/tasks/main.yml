@@ -1,0 +1,9 @@
+---
+- name: Get dotfiles
+  git:
+    repo: https://github.com/fishd72/Dotfiles.git
+    dest: "/home/{{ new_user }}/Dotfiles"
+- name: Run config script
+  shell: "/home/{{ new_user }}/Dotfiles/update_local_config.sh"
+  args:
+    chdir: "/home/{{ new_user }}/Dotfiles"

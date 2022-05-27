@@ -1,0 +1,28 @@
+---
+  - hosts: all
+    gather_facts: yes
+    become: yes
+
+    tasks:
+      - name: Secure SSH server
+        import_role:
+          name: secure_sshd
+      - name: Change hostname
+        import_role:
+          name: change_hostname
+      - name: Remove default user accounts
+        import_role:
+          name: remove_default_user
+      - name: Upgrade apt cache and installed apps
+        import_role:
+          name: apt_upgrade
+      - name: Install key software
+        import_role:
+          name: install_basics
+      - name: Copy dotfiles from github
+        become: no
+        import_role:
+          name: dotfiles
+      - name: Configure firewall
+        import_role:
+          name: configure_ufw

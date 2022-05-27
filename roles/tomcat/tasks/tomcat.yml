@@ -1,0 +1,7 @@
+---
+- name: Install tomcat
+  apt: 
+    pkg: "{{ tomcat_packages }}"
+    state: latest
+    force_apt_get: yes
+  tags: tomcat
